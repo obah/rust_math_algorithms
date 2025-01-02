@@ -1,15 +1,15 @@
 // implementation 1 by me
-// fn ext_euclid(a: i8, b: i8) -> (i8, i8, i8) {
+// fn ext_euclid(a: i32, b: i32) -> (i32, i32, i32) {
 //     if a < b {
 //         panic!("A lesser then B")
 //     }
 
 //     let mut k = 2; //counter
 
-//     let mut r: Vec<i8> = vec![a, b];
-//     let mut s: Vec<i8> = vec![1, 0];
-//     let mut t: Vec<i8> = vec![0, 1];
-//     let mut q: Vec<i8> = vec![];
+//     let mut r: Vec<i32> = vec![a, b];
+//     let mut s: Vec<i32> = vec![1, 0];
+//     let mut t: Vec<i32> = vec![0, 1];
+//     let mut q: Vec<i32> = vec![];
 
 //     while r[k - 1] != 0 {
 //         let q_new = r[k - 2] / r[k - 1];
@@ -39,7 +39,7 @@
 // }
 
 // implementation 2 by chatGPT
-fn _ext_euclid(a: i8, b: i8) -> (i8, i8, i8) {
+fn calc_ext_euclid(a: i32, b: i32) -> (i32, i32, i32) {
     let (mut r0, mut r1) = (a, b);
     let (mut s0, mut s1) = (1, 0);
     let (mut t0, mut t1) = (0, 1);
@@ -63,22 +63,13 @@ fn _ext_euclid(a: i8, b: i8) -> (i8, i8, i8) {
     (r0, s0, t0)
 }
 
-pub fn ext_euclid(a: i8, b: i8) {
-    let (gcd, s, t) = _ext_euclid(a, b);
+pub fn ext_euclid(a: i32, b: i32) -> (i32, i32, i32) {
+    let (gcd, s, t) = calc_ext_euclid(a, b);
 
     // println!(
     //     "ext_euclid of {} and {} is => gcd: {}, s: {}, t: {}",
     //     a, b, gcd, s, t
     // );
 
-    println!("gcd({}, {}) = {}", a, b, gcd);
-    println!("s = {}, t = {}", s, t);
-    println!(
-        "Verification: {} * {} + {} * {} = {}",
-        s,
-        a,
-        t,
-        b,
-        s * a + t * b
-    );
+    (gcd, s, t)
 }
