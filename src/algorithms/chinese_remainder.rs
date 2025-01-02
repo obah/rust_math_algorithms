@@ -24,7 +24,7 @@ fn check_coprime(mods: &[usize]) -> bool {
     is_coprime
 }
 
-fn solve_chinese_remainder(rh_values: &[usize], mods: &[usize]) -> usize {
+fn solve_chinese_remainder(rh_values: &[usize], mods: &[usize]) -> Vec<isize> {
     if !check_coprime(mods) {
         panic!("The mods arent coprime");
     }
@@ -45,13 +45,28 @@ fn solve_chinese_remainder(rh_values: &[usize], mods: &[usize]) -> usize {
         x += x_prime;
     }
 
-    x % mods_product
+    let x: isize = x.try_into().unwrap();
+    let mods_product: isize = mods_product.try_into().unwrap();
+    let result = x % mods_product;
+
+    let remainder_class: Vec<isize> = vec![
+        result - (2 * mods_product),
+        result - mods_product,
+        result,
+        result + mods_product,
+        (result + (2 * mods_product)),
+    ];
+
+    remainder_class
 }
 
-pub fn chinese_remainder(rh_values: &[usize], mods: &[usize]) -> usize {
+pub fn chinese_remainder(rh_values: &[usize], mods: &[usize]) -> Vec<isize> {
     let remainder = solve_chinese_remainder(rh_values, mods);
 
-    println!("Remainder for these congruences are {remainder}");
+    println!(
+        "Remainder for these congruences are and not restricted to: ..., {:?}, ...",
+        remainder
+    );
 
     remainder
 }
