@@ -32,11 +32,11 @@ impl Polynomial {
         *self.coeffs.last().unwrap_or(&0.0)
     }
 
-    fn scalar_mul(&self, scalar: f64) -> Self {
-        let coeffs = self.coeffs.iter().map(|&c| c * scalar).collect();
+    // fn scalar_mul(&self, scalar: f64) -> Self {
+    //     let coeffs = self.coeffs.iter().map(|&c| c * scalar).collect();
 
-        Polynomial::new(coeffs)
-    }
+    //     Polynomial::new(coeffs)
+    // }
 
     fn shift(&self, n: usize) -> Self {
         let mut coeffs = vec![0.0; n];
